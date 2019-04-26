@@ -3,13 +3,16 @@
 
 ## Introduction
 Initial exploitation of a machine usually involves gaining access to a
-low-privileged user. That's great and a lot of information can be gleaned from
-a user account, but higher levels of access allow for complete ownership of a
-machine. In this lab you will be given credentials for a very low level user
-on a docker container. From the low level user you will be able to exploit
-poorly setup systems up a chain of increasing levels of privilege to eventually 
-gain root. to higher levels of Hopefully learning about how attackers elevate 
-privileges you will be better prepared to harden a system in the future. 
+low-privileged user. This lab focuses on using that initial foothold to exploit
+a poorly administered system. You will be given credentials for a highly 
+restricted user account and must use what little tools you have at your
+disposal to elevate your privileges.
+
+This document will walk you through the steps needed to gain access to a user
+named *level1*, then *level2*, and finally *root*, but you are encouraged to 
+find your own exploits and work-arounds to the restrictions put in place. If 
+this lab has already been set up by an instructor, you may proceed to the
+*Accessing the Lab Container* section.
 
 ## Getting Started
 
