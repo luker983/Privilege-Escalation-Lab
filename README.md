@@ -14,7 +14,8 @@ privileges you will be better prepared to harden a system in the future.
 ## Getting Started
 
 ### Docker
-
+Build a Docker image by running `docker build -it privesc .` in the same directory as the Dockerfile.
+ 
 ### Level 0 Credentials
 Access the docker container using SSH.
 
