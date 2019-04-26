@@ -16,7 +16,7 @@ privileges you will be better prepared to harden a system in the future.
 ###  Docker
 
 #### Build Image
-Build a Docker image by running the following command, where `.` assumes that
+Build a Docker image by running the following command, assuming that
 the Dockerfile is in your current working directory:
 ```
 docker build -t privesc .
