@@ -13,9 +13,35 @@ privileges you will be better prepared to harden a system in the future.
 
 ## Getting Started
 
-### Docker
-Build a Docker image by running `docker build -it privesc .` in the same directory as the Dockerfile.
- 
+###  Docker
+
+#### Build Image
+Build a Docker image by running the following command, where `.` assumes that
+the Dockerfile is in your current working directory:
+```
+docker build -t privesc .
+``` 
+This will create a new image with the name *privesc*. To verify, run: 
+```
+docker images | grep privesc
+``` 
+
+### Start Container
+The *privesc* image can now be used to start a container:
+```
+docker run --name privesc_lab -id privesc
+``` 
+`--name` allows us to choose a container name. A name will be generated if this option is not used.
+
+`-i` keeps stdin open, allowing for the container to stay running while it is in the background.
+
+`-d` runs the container in the background.
+
+To verify, run:
+```
+docker ps | grep privesc_lab
+```
+
 ### Level 0 Credentials
 Access the docker container using SSH.
 
