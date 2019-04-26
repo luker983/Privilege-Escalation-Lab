@@ -26,14 +26,16 @@ This will create a new image with the name *privesc*. To verify, run:
 docker images | grep privesc
 ``` 
 
-### Start Container
+#### Start Container
 The *privesc* image can now be used to start a container:
 ```
 docker run --name privesc_lab -id privesc
 ``` 
-`--name` allows us to choose a container name. A name will be generated if this option is not used.
+`--name` allows us to choose a container name. A name will be generated if this
+option is not used.
 
-`-i` keeps stdin open, allowing for the container to stay running while it is in the background.
+`-i` keeps stdin open, allowing for the container to stay running while it is 
+in the background.
 
 `-d` runs the container in the background.
 
@@ -42,11 +44,21 @@ To verify, run:
 docker ps | grep privesc_lab
 ```
 
-### Level 0 Credentials
-Access the docker container using SSH.
-
-Username: `level0`
-Password: `password`
+### Accessing the Lab Container
+The container exposes SSH on port 22. To get the IP address of the container 
+with the name *privesc_lab*, run:
+```
+docker inspect privesc_lab | grep IPAddress
+```
+Assuming that the IP address output is `172.17.0.1`, you may access the 
+container with:
+```
+ssh level0@172.17.0.1
+```
+The credentials for the *level0* user are:
+```
+level0:password
+```
 
 ## Escalation
 
