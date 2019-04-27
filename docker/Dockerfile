@@ -7,6 +7,7 @@ RUN apt-get install openssl -y
 RUN apt-get install ssh -y
 RUN apt-get install vim -y
 RUN apt-get install nano -y
+RUN apt-get install cron -y
 
 # Setup users
 RUN echo "root:IAMR00T" | chpasswd
@@ -20,9 +21,16 @@ RUN mkdir /home/level0/.bin
 RUN ln -s /bin/ls /home/level0/.bin
 RUN ln -s /bin/cat /home/level0/.bin
 RUN ln -s /bin/echo /home/level0/.bin
-RUN ln -s /bin/vi /home/level0/.bin
-RUN ls -s /bin/nano /home/level0/.bin
+RUN ln -s /bin/mv /home/level0/.bin
+RUN ln -s /bin/chmod /home/level0/.bin
 
-# Expose SSH port and start service
+# Cron vulnerability
+COPY monitor.sh /home/level0/monitor.sh
+RUN chown level1 /home/level0/monitor.sh
+RUN usermod -a -G level0 level1
+RUN chmod 775 /home/level0
+RUN echo "* * * * * level1 bash /home/level0/monitor.sh > /home/level0/monitor.out" >> /etc/crontab
+
+# Expose SSH port and start services
 EXPOSE 22
-ENTRYPOINT service ssh restart && bash
+ENTRYPOINT service ssh restart && service cron restart && bash
