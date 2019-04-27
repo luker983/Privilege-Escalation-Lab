@@ -24,12 +24,15 @@ RUN ln -s /bin/echo /home/level0/.bin
 RUN ln -s /bin/mv /home/level0/.bin
 RUN ln -s /bin/chmod /home/level0/.bin
 
-# Cron vulnerability
+# level1 exploit
 COPY monitor.sh /home/level0/monitor.sh
 RUN chown level1 /home/level0/monitor.sh
 RUN usermod -a -G level0 level1
 RUN chmod 775 /home/level0
 RUN echo "* * * * * level1 bash /home/level0/monitor.sh > /home/level0/monitor.out" >> /etc/crontab
+RUN echo "ThisIsThePasswordForLevel1" > /home/level1/password.backup
+RUN chown level1 /home/level1/password.backup
+RUN chmod 660 /home/level1/password.backup
 
 # Expose SSH port and start services
 EXPOSE 22
