@@ -66,6 +66,38 @@ level0:password
 ## Escalation
 
 ### Cron
+The first thing you might notice is that the *level0* user has an extremely
+restricted shell. To see what shell you're running in:
+```
+echo $0
+```
+Very little can be done in this state, but you may notice that there is a 
+`monitor.sh` script in the *level0* home directory owned by *level1*. Another
+file named `monitor.out` in the same directory is being updated occasionally.
+This is a sign that cron is being used.
+
+Cron is a time-based job scheduler used for automating system tasks. When it
+is improperly used it can become an entry-point for escalating privileges. Cron
+jobs are stored in many different places, but for our purposes lets start by
+looking in `/etc/crontab`. Look for a job that executes the `monitor.sh`
+script.
+
+It would be ideal to modify the `monitor.sh` script in order to execute another
+command, but *level0* does not have write permissions on that file. Instead,
+the solution is to rename `monitor.sh` to something else and then upload a
+custom script with the name `monitor.sh`. The cron job will then execute your
+custom script instead of the original script, essentially allowing you to run 
+commands as *level1*. 
+
+Once you are able to run commands as *level1*, look for things that might be
+unique to *level1*. Perhaps there is an SSH key in their home directory or an
+email that contains some personal information.
+
+```
+1. What is the default shell for the level0 user?
+2. What was your final exploit script to get level1 credentials?
+3. What are the level1 credentials?
+```
 
 ### Configurations
 
