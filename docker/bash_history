@@ -1,0 +1,8 @@
+ls
+cd ~/.bin
+cd ..
+vim password.backup
+su Level2
+su Level2 -p L3v3l2!
+su Level2
+exit
