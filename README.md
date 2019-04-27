@@ -67,7 +67,7 @@ level0:password
 
 ### Cron
 The first thing you might notice is that the *level0* user has an extremely
-restricted shell. To see what shell you're running in:
+restricted shell. To see what shell you're running in, run:
 ```
 echo $0
 ```
@@ -99,6 +99,49 @@ email that contains some personal information.
 3. What are the level1 credentials?
 ```
 
-### Configurations
+### Logs and Config Files
+All it takes is one tiny mistake from a user to compromise a system. Keeping a
+server up-to-date and functional is a difficult task, and sysadmins will
+inevitably make an error. Enumerating through the many ways in which a password
+might leak is a nice and easy way to either move laterally or gain access to 
+another user. 
+
+Many services like Apache and MySQL have plaintext passwords and keys in their
+configuration files. Logs could also contain sensitive information. There are 
+many great Linux enumeration cheat sheets and scripts available online that can
+help automate this process. 
+
+Everyone accidentally types in a password to a plaintext field at some point, 
+and most systems keep a record of your bash history. Look for a mistake that
+*level1* has made and use it to gain access to *level2*. 
+
+```
+4. What mistake did level1 make? 
+5. What are the level2 credentials?
+```
 
 ### SUID
+Linux permissions can be confusing and it's tempting to choose convenience over
+security. One of the most dangerous examples of this is the Set User ID bit. 
+This is a special permissions bit that runs a program as the owner instead of 
+the caller. To view all SUID enable programs that you have permissions to view, 
+run:
+```
+find / -perm -4000 2>/dev/null
+```
+Special binaries like `sudo` and `passwd` use this bit to allow any user to
+modify `/etc/shadow` entries without having root access. However, those
+binaries authenticate. Programs that execute commands without authentication
+are where the SUID bit can be exploited. For instance: `nmap` and `find` can 
+be used to escalate privileges to the level of the owner (usually root) when
+SUID is set.
+
+Find what binaries have the SUID bit set and see if you can find one that does
+not authenticate user commands. A good way to tell what shouldn't be there is
+comparing the output of the `find` command with a personal machine. Use that
+program to change the root password.
+
+```
+6. What program did you use to exploit an SUID bit?
+7. How did you change the root password?
+```
