@@ -36,6 +36,8 @@ RUN chmod 660 /home/level1/password.backup
 
 # level2 exploit
 COPY bash_history /home/level1/.bash_history
+RUN chown level1:level1 /home/level1/.bash_history
+RUN chmod 660 /home/level1/.bash_history
 
 # level3 exploit
 RUN chgrp level2 /usr/bin/vim.basic
