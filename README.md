@@ -130,18 +130,18 @@ run:
 find / -perm -4000 2>/dev/null
 ```
 Special binaries like `sudo` and `passwd` use this bit to allow any user to
-modify `/etc/shadow` entries without having root access. However, those
+modify `/etc/shadow` entries without having *root* access. However, those
 binaries authenticate. Programs that execute commands without authentication
 are where the SUID bit can be exploited. For instance: `nmap` and `find` can 
-be used to escalate privileges to the level of the owner (usually root) when
+be used to escalate privileges to the level of the owner (usually *root*) when
 SUID is set.
 
 Find what binaries have the SUID bit set and see if you can find one that does
 not authenticate user commands. A good way to tell what shouldn't be there is
 comparing the output of the `find` command with a personal machine. Use that
-program to change the root password.
+program to get the *root* password hash.
 
 ```
 6. What program did you use to exploit an SUID bit?
-7. How did you change the root password?
+7. What is the root password hash?
 ```
